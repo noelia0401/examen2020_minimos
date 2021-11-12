@@ -1,15 +1,43 @@
 <?php
 include 'head.php';
-// si he pulsado el boton calcular
+
+$TMB="";
 if (isset($_REQUEST['btn_calcular']))
 {
-    echo 'YA has pulsado calcular';
+    
+    $peso= $_REQUEST['txt_peso'];
+    $tipo_peso= $_REQUEST['rb_tipo_peso'];
+    $altura= $_REQUEST['txt_altura'];
+    $edad= $_REQUEST['txt_edad'];
+    $sexo= $_REQUEST['rb_sexo'];
+    $nivel_actividad= $_REQUEST['cmb_actividad'];
+
+    if ($tipo_peso=="libras")
+    {
+        $peso=$peso*0.453592;
+    }
+
+    if (($edad>21) and ($edad<70) and ($altura> 150) and ($altura < 200))
+    {
+        if ($sexo=="mujer")
+        {
+            $TMB= 655 + (9.6 * $peso) + (1.8 * $altura) -(4.7 * $edad);
+        }
+        else 
+        {
+            $TMB= 66 + (13.7*$peso) + (5*$altura) -(6.8 * $edad);
+        }
+    }
+    else 
+    {
+        $TMB="NO SE PUEDE CALCULAR";
+    }
 }
 echo'  
 
      <div class="postcontent">
       <h2>Calculadora Harris-Benedict   </h2>
-              <form action="" method="post">              
+              <form action="Solucion_Ejercicio.php" method="post">              
                     <p>
                     <form>
                         <table align="center" border="2">
@@ -18,11 +46,11 @@ echo'
                                 <td align="right">Nivel de Actividad:</td>  
                                 <td colspan=2>
                                     <select name="cmb_actividad">
-                                    <option value="">Sedentario</option>
-                                    <option value="">Actividad Ligera</option>
-                                    <option value="">Actividad Moderada</option>
-                                    <option value="">Actividad Intensa</option>
-                                    <option value="">Actividad Muy Intensa</option>
+                                    <option value="1.2">Sedentario</option>
+                                    <option value="1.375">Actividad Ligera</option>
+                                    <option value="1.55">Actividad Moderada</option>
+                                    <option value="1.725">Actividad Intensa</option>
+                                    <option value="1.9">Actividad Muy Intensa</option>
                                     </select>
                                 </td>
                             </tr>
@@ -36,8 +64,8 @@ echo'
                             <tr>
                                 <td ></td>
                                 <td>
-                                    <input type="radio"  name="rb_tipo_peso"  checked="checked" value=""/>Kilos	
-                                    <input type="radio"  name="rb_tipo_peso"  value=""/>Libras
+                                    <input type="radio"  name="rb_tipo_peso"  checked="checked" value="kg"/>Kilos	
+                                    <input type="radio"  name="rb_tipo_peso"  value="libras"/>Libras
                                     </td>
                              </tr>  
                             <tr>
@@ -56,8 +84,8 @@ echo'
                             <tr>
                                 <td align="right">Sexo :</td>
                                 <td>
-                                    <input type="radio"  name="rb_sexo"  checked="checked" value=""/>Hombre	
-                                    <input type="radio"  name="rb_sexo"  value=""/>Mujer
+                                    <input type="radio"  name="rb_sexo"  checked="checked" value="hombre"/>Hombre	
+                                    <input type="radio"  name="rb_sexo"  value="mujer"/>Mujer
                                     </td>
                              </tr>  
                             
@@ -76,7 +104,7 @@ echo'
                     <br>
                     <label for="txt_calorias">Las calorias recomendadas diarias son :</label>
                         	
-                        <input type="text" id="txt_calorias" name="txt_calorias" size="5" /> calorias
+                        <input type="text" id="txt_calorias" name="txt_calorias" size="" value="'.$TMB.'" /> calorias
 
                     
 
