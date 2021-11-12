@@ -1,7 +1,7 @@
 <?php
 include 'head.php';
 
-$TMB="";
+$calorias="";
 if (isset($_REQUEST['btn_calcular']))
 {
     
@@ -17,7 +17,7 @@ if (isset($_REQUEST['btn_calcular']))
         $peso=$peso*0.453592;
     }
 
-    if (($edad>21) and ($edad<70) and ($altura> 150) and ($altura < 200))//si los datos son correctos 
+    if (($edad>21) and ($edad<70) and ($altura> 150) and ($altura < 200)) //si los datos son correctos 
     {
         if ($sexo=="mujer")
         {
@@ -27,10 +27,11 @@ if (isset($_REQUEST['btn_calcular']))
         {
             $TMB= 66 + (13.7*$peso) + (5*$altura) -(6.8 * $edad);
         }
+        $calorias=$TMB*$nivel_actividad;
     }
     else //si los datos no son validos
     {
-        $TMB="NO SE PUEDE CALCULAR";
+        $calorias="NO SE PUEDE CALCULAR";
     }
 }
 echo'  
@@ -104,7 +105,7 @@ echo'
                     <br>
                     <label for="txt_calorias">Las calorias recomendadas diarias son :</label>
                         	
-                        <input type="text" id="txt_calorias" name="txt_calorias" size="" value="'.$TMB.'" /> calorias
+                        <input type="text" id="txt_calorias" name="txt_calorias" size="" value="'.$calorias.'" /> calorias
 
                     
 
