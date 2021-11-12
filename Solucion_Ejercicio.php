@@ -12,12 +12,12 @@ if (isset($_REQUEST['btn_calcular']))
     $sexo= $_REQUEST['rb_sexo'];
     $nivel_actividad= $_REQUEST['cmb_actividad'];
 
-    if ($tipo_peso=="libras")
+    if ($tipo_peso=="libras") //pasar libras a kg
     {
         $peso=$peso*0.453592;
     }
 
-    if (($edad>21) and ($edad<70) and ($altura> 150) and ($altura < 200))
+    if (($edad>21) and ($edad<70) and ($altura> 150) and ($altura < 200))//si los datos son correctos 
     {
         if ($sexo=="mujer")
         {
@@ -28,7 +28,7 @@ if (isset($_REQUEST['btn_calcular']))
             $TMB= 66 + (13.7*$peso) + (5*$altura) -(6.8 * $edad);
         }
     }
-    else 
+    else //si los datos no son validos
     {
         $TMB="NO SE PUEDE CALCULAR";
     }
